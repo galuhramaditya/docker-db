@@ -8,7 +8,19 @@ services:
       - MYSQL_ROOT_PASSWORD=dibimbing
     volumes:
       - ./mysql/db:/var/lib/mysql
-      - ./mysql/mysql-scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - dibimbing
+  
+  postgres:
+    image: quay.io/debezium/example-postgres:latest
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=dibimbing
+    volumes:
+      - ./postgres/db:/var/lib/postgresql
     networks:
       - dibimbing
 
